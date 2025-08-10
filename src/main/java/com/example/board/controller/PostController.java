@@ -16,7 +16,7 @@ public class PostController {
         this.postRepository = postRepository;
     }
 
-    // 헬스체크용 간단한 엔드포인트
+    // 헬스체크용 간단한 엔드포인트 (데이터베이스 연결 없이도 작동)
     @GetMapping("/health")
     @ResponseBody
     public String health() {
@@ -35,12 +35,6 @@ public class PostController {
     public String savePost(@ModelAttribute Post post) {
         postRepository.save(post);
         return "redirect:/posts";  // 저장 후 글 목록 페이지로 이동
-    }
-
-    // 루트 경로 - 글 목록으로 리다이렉트
-    @GetMapping("/")
-    public String root() {
-        return "redirect:/posts";
     }
 
     // 글 목록 조회
