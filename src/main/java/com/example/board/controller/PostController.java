@@ -16,6 +16,13 @@ public class PostController {
         this.postRepository = postRepository;
     }
 
+    // 헬스체크용 간단한 엔드포인트
+    @GetMapping("/health")
+    @ResponseBody
+    public String health() {
+        return "OK";
+    }
+
     // 글 작성 폼 화면
     @GetMapping("/new")
     public String showForm(Model model) {
