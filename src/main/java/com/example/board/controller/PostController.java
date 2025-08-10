@@ -30,6 +30,12 @@ public class PostController {
         return "redirect:/posts";  // 저장 후 글 목록 페이지로 이동
     }
 
+    // 루트 경로 - 글 목록으로 리다이렉트
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/posts";
+    }
+
     // 글 목록 조회
     @GetMapping("")
     public String listPosts(Model model) {
