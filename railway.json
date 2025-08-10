@@ -4,8 +4,8 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "java -jar build/libs/*.jar",
-    "healthcheckPath": "/posts/health",
+    "startCommand": "java -jar build/libs/board-0.0.1-SNAPSHOT.jar",
+    "healthcheckPath": "/",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10

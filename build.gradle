@@ -36,3 +36,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// Spring Boot JAR 생성을 위한 설정
+jar {
+	enabled = false
+	archiveClassifier = ''
+}
