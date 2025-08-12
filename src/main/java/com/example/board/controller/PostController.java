@@ -26,22 +26,22 @@ public class PostController {
     // 글 작성 폼 화면
     @GetMapping("/new")
     public String showForm(Model model) {
-        model.addAttribute("post", new Post());  // 빈 Post 객체를 넘김
-        return "form";  // templates/form.html로 이동
+        model.addAttribute("post", new Post());
+        return "form";
     }
 
     // 글 작성 처리
     @PostMapping("/save")
     public String savePost(@ModelAttribute Post post) {
         postRepository.save(post);
-        return "redirect:/posts";  // 저장 후 글 목록 페이지로 이동
+        return "redirect:/posts";
     }
 
     // 글 목록 조회
     @GetMapping("")
     public String listPosts(Model model) {
         model.addAttribute("posts", postRepository.findAll());
-        return "list";  // templates/list.html로 이동
+        return "list";
     }
 
     // 글 상세 조회
@@ -50,6 +50,34 @@ public class PostController {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
         model.addAttribute("post", post);
-        return "detail";  // templates/detail.html로 이동
+        return "detail";
+    }
+
+    // 글 수정 폼
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable Long id, Model model) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        model.addAttribute("post", post);
+        return "edit";
+    }
+
+    // 글 수정 처리
+    @PostMapping("/{id}/update")
+    public String updatePost(@PathVariable Long id, @ModelAttribute Post form) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        post.setTitle(form.getTitle());
+        post.setContent(form.getContent());
+        post.setWriter(form.getWriter());
+        postRepository.save(post);
+        return "redirect:/posts/" + id;
+    }
+
+    // 글 삭제 처리
+    @PostMapping("/{id}/delete")
+    public String deletePost(@PathVariable Long id) {
+        postRepository.deleteById(id);
+        return "redirect:/posts";
     }
 }

@@ -17,6 +17,13 @@
         <strong>내용:</strong>
         <p th:text="${post.content}"></p>
     </div>
+
+    <div>
+        <a th:href="@{'/posts/' + ${post.id} + '/edit'}">수정</a>
+        <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post" style="display:inline">
+            <button type="submit" onclick="return confirm('삭제하시겠습니까?')">삭제</button>
+        </form>
+    </div>
     
     <a href="/posts">목록으로 돌아가기</a>
 </body>
